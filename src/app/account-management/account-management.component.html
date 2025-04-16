@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="header">
+    <h2>Quản lý tài khoản</h2>
+    <a href="#" (click)="addAccount()" class="btn-create">+ Create</a>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Tìm kiếm tài khoản" [(ngModel)]="searchTerm" (input)="searchAccounts()" />
+    <button (click)="searchAccounts()">Tìm</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Vai trò</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="filteredAccounts.length === 0">
+        <td colspan="5" style="text-align: center;">Không có tài khoản nào.</td>
+      </tr>
+      <tr *ngFor="let account of filteredAccounts">
+        <td>#{{ account.id }}</td>
+        <td><img [src]="account.avatar || defaultAvatar" alt="avatar" /> {{ account.username }}</td>
+        <td>{{ account.email }}</td>
+        <td>{{ account.role || 'User' }}</td>
+        <td class="actions">
+          <a href="#" class="details" (click)="viewDetails(account)">Details</a>
+          <a href="#" class="edit" (click)="editAccount(account)">✏️</a>
+          <a href="#" class="delete" (click)="deleteAccount(account.id)">🗑️</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
